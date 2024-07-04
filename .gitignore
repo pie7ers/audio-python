@@ -1,0 +1,23 @@
+# ingore MAC files
+.DS_Store
+.DS_store
+
+# ignore python folder and files
+__pycache__
+myenv
+
+# ignore VScode generated
+/.vscode/
+/.idea/
+
+#experiment folders
+MyTests
+experiments
+
+.env
+
+#Garbash and miscellaneous
+Trash
+Read
+Files
+outputWhisper
