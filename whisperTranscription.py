@@ -10,9 +10,9 @@ base_dir = Path(__file__).resolve().parent
 files_dir = base_dir / 'files'
 output_dir = base_dir / 'outputWhisper'
 
-file_name = 'MY_FYLE_NAME'
+file_name = '12-daily'
 video_path = files_dir / (file_name+'.mov')
-audio_path = output_dir / 'audio.wav'
+audio_path = output_dir / (file_name+'.wav')
 transcript_path = output_dir / 'transcript.txt'
 transcript_with_newline_path = output_dir / (file_name+'.txt')
 translated_transcript_path = output_dir / (file_name+'-translated.txt')
