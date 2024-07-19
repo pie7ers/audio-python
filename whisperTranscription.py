@@ -4,13 +4,15 @@ import whisper
 from pathlib import Path
 from googletrans import Translator
 import json
+from datetime import datetime
+from rich import print
 
 # Define paths using pathlib
 base_dir = Path(__file__).resolve().parent
 files_dir = base_dir / 'files'
 output_dir = base_dir / 'outputWhisper'
 
-file_name = '12-daily'
+file_name = 'video-name'
 video_path = files_dir / (file_name+'.mov')
 audio_path = output_dir / (file_name+'.wav')
 transcript_path = output_dir / 'transcript.txt'
@@ -103,6 +105,10 @@ def translate_to_spanish(text):
     return translated_text.strip()
 
 def main():
+    # Registrar la hora de inicio
+    start_time = datetime.now()
+    print(f'[bold green]Hora de inicio: {start_time.strftime("%H:%M:%S")}[/bold green]')
+
     # Extract audio from the video
     extract_audio_from_video(video_path, audio_path)
     
@@ -117,6 +123,9 @@ def main():
         f.write(translated_text.strip())
 
     print("Translated transcript saved to:", translated_transcript_path)
+    
+    end_time = datetime.now()
+    print(f'[bold green]Hora de finalización: {end_time.strftime("%H:%M:%S")}[/bold green]')
 
 if __name__ == "__main__":
     main()

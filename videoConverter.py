@@ -58,5 +58,5 @@ def convert_mov_to_mp4(input_path, bitrate='1M'):
         print(f'Error en la conversión: {e}')
 
 # Ejemplo de uso
-input_file = 'files/12-daily.mov'
+input_file = 'files/video-name.mov'
 convert_mov_to_mp4(input_file, bitrate='1M')  # Puedes ajustar el bitrate según tus necesidades
