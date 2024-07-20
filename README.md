@@ -5,9 +5,9 @@
 - install ffmpeg
     brew install ffmpeg
 
-- is recomended install python 3.12.3 or higher
+- is recomended install python 3.12 or higher
         
-    brew install python@3.12.3
+    brew install python@3.12
 
 - create the virtual environment
 
