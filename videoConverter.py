@@ -2,6 +2,12 @@ import os
 import subprocess
 from datetime import datetime
 from rich import print
+from pathlib import Path
+from dotenv import load_dotenv
+from envs import getFileName
+
+# Load environment variables
+load_dotenv()
 
 def convert_mov_to_mp4(input_path, bitrate='1M'):
     """
@@ -12,20 +18,20 @@ def convert_mov_to_mp4(input_path, bitrate='1M'):
     :param input_path: Ruta al archivo .mov de entrada.
     :param bitrate: Tasa de bits para el video de salida. Valores más bajos reducen el tamaño del archivo.
     """
-    # Extraer la ruta, el nombre del archivo y la extensión
+    # Extract the path, name and extension
     dir_name, file_name = os.path.split(input_path)
     base_name, _ = os.path.splitext(file_name)
     
-    # Crear la ruta del archivo de salida .mp4
+    # Create output Path
     output_path = os.path.join(dir_name, f'{base_name}.mp4')
     
-    # Si el archivo de salida ya existe, agregar el sufijo "-copy"
+    # if the output file already exists, add the suffix "-copy"
     copy_suffix = 1
     while os.path.exists(output_path):
         output_path = os.path.join(dir_name, f'{base_name}-copy{copy_suffix}.mp4')
         copy_suffix += 1
     
-    # Registrar la hora de inicio
+    # Record start time
     start_time = datetime.now()
     print(f'[bold green]Hora de inicio: {start_time.strftime("%H:%M:%S")}[/bold green]')
     
@@ -45,18 +51,21 @@ def convert_mov_to_mp4(input_path, bitrate='1M'):
         end_time = datetime.now()
         print(f'Conversión exitosa: {output_path}')
         
-        # Registrar la hora final y calcular la duración
+        # Record end time and calculate duration
         print(f'[bold green]Hora de finalización: {end_time.strftime("%H:%M:%S")}[/bold green]')
         duration = end_time - start_time
         print(f'[bold green]Duración del proceso: {str(duration)}[/bold green]')
         
-        # Calcular el tamaño del archivo resultante en MB
+        # Calulate output file size in MB
         file_size = os.path.getsize(output_path) / (1024 * 1024)
         print(f'[bold orange]Tamaño del archivo: {file_size:.2f} MB[/bold orange]')
         
     except subprocess.CalledProcessError as e:
         print(f'Error en la conversión: {e}')
 
-# Ejemplo de uso
-input_file = 'files/video-name.mov'
-convert_mov_to_mp4(input_file, bitrate='1M')  # Puedes ajustar el bitrate según tus necesidades
+# Implementation
+base_dir = Path(__file__).resolve().parent
+files_dir = base_dir / 'files'
+file_name = getFileName('cv')
+input_file = files_dir / (file_name)
+convert_mov_to_mp4(input_file, bitrate='1M')  # you can adjust the bitrate according to your needs

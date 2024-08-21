@@ -6,18 +6,20 @@ from googletrans import Translator
 import json
 from datetime import datetime
 from rich import print
+from envs import getFileName
 
 # Define paths using pathlib
 base_dir = Path(__file__).resolve().parent
 files_dir = base_dir / 'files'
 output_dir = base_dir / 'outputWhisper'
 
-file_name = 'video-name'
-video_path = files_dir / (file_name+'.mov')
-audio_path = output_dir / (file_name+'.wav')
+file_name = getFileName()
+file_name_no_extension = file_name.split('.')[0]
+video_path = files_dir / (file_name)
+audio_path = output_dir / (file_name_no_extension+'.wav')
 transcript_path = output_dir / 'transcript.txt'
-transcript_with_newline_path = output_dir / (file_name+'.txt')
-translated_transcript_path = output_dir / (file_name+'-translated.txt')
+transcript_with_newline_path = output_dir / (file_name_no_extension+'.txt')
+translated_transcript_path = output_dir / (file_name_no_extension+'-translated.txt')
 
 # Ensure output directory exists
 output_dir.mkdir(parents=True, exist_ok=True)
